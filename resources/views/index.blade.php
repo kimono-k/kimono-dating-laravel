@@ -38,8 +38,19 @@
         <ul class="list nav__list collapsible__content">
             <li class="nav__item"><a href="#">About</a></li>
             <li class="nav__item"><a href="#">Success Stories</a></li>
-            <li class="nav__item"><a href="#">Login</a></li>
-            <li class="nav__item"><a href="#">Register</a></li>
+            @if (Route::has('login'))
+                @auth
+                    <li class="nav__item"><a href="{{ url('/home') }}">{{ Auth::user()->name }}</a></li>
+                @else
+                    <li class="nav__item"><a href="{{ route('login') }}">Login</a></li>
+
+                    @if (Route::has('register'))
+                        <li class="nav__item"><a href="{{ route('register') }}">Register</a></li>
+                    @endif
+                @endauth
+            @endif
+{{--            <li class="nav__item"><a href="#">Login</a></li>--}}
+{{--            <li class="nav__item"><a href="#">Register</a></li>--}}
         </ul>
     </nav>
 </header>
