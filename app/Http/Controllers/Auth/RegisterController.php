@@ -53,6 +53,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'country' => ['required', 'string', 'max:255'],
+            'province' => ['required', 'string', 'max:255'],
+            'date_of_birth' => ['required', 'string', 'max:255'], // Not sure if the datatype is correct here
+            'gender' => ['required', 'string', 'max:255']
         ]);
     }
 
@@ -62,12 +66,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'country' => $data['country'],
+            'province' => $data['province'],
+            'date_of_birth' => $data['date_of_birth'],
+            'gender' => $data['gender']
         ]);
     }
 }
